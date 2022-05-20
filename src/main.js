@@ -6,11 +6,13 @@ import { setupRouter } from './router'
 import { setupStore } from './store'
 import { useCustom } from './plugin/useCustom'
 
+import router from '@/router'
+
 import './assets/scss/index.scss'
 
 import '@/mock'
 
-const bootstrap = () => {
+const bootstrap = async () => {
   const app = createApp(App)
 
   // 注册 naive 组件
@@ -23,7 +25,9 @@ const bootstrap = () => {
   setupStore(app)
 
   // 注册路由
-  setupRouter(app)
+  await setupRouter(app)
+
+  await router.isReady()
 
   app.mount('#app')
 }

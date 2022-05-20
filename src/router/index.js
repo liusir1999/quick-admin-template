@@ -1,8 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createRouterGuards } from './router-guards'
 
-const Layout = () => import('@/layout/index.vue')
-
 export const whiteRoutes = [
   {
     name: 'login',
@@ -17,6 +15,21 @@ export const whiteRoutes = [
   },
 ]
 
+const Layout = () => import('@/layout/index.vue')
+
+export const ErrorRoute = {
+  name: 'ErrorPage',
+  path: '/:path(.*)*',
+  component: Layout,
+  children: [
+    {
+      name: 'ErrorPage',
+      path: '/:path(.*)*',
+      component: () => import('@/views/exception/404.vue'),
+    },
+  ],
+}
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: whiteRoutes,
@@ -28,3 +41,5 @@ export const setupRouter = (app) => {
   app.use(router)
   createRouterGuards(router)
 }
+
+export default router

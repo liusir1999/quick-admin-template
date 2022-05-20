@@ -3,21 +3,28 @@
  * @author lyf
  * @date 2022/1/10
  * */
-import { useUserStore } from '@/store/modules/user'
 import { whiteRoutes } from './index'
+import { createStorage } from '../lib/storage'
+import { defineUserStore } from '../store/modules/user'
+import { defineRoutesStore } from '../store/modules/route'
+import { ErrorRoute } from './index'
+
+const storage = createStorage()
 
 export const createRouterGuards = (router) => {
-  const userStore = useUserStore()
-  const isLogin = userStore.isLogin
   const whitePathRoutes = whiteRoutes.map((item) => item.name)
 
-  router.beforeEach((to, from, next) => {
-    if (whitePathRoutes.includes(to.name)) {
-      next()
-      return
-    }
+  router.beforeEach(async (to, from, next) => {
+    const Loading = window['$loading'] || null
+    Loading && Loading.start()
 
-    if (!isLogin) {
+    const token = storage.get('token')
+    if (!token) {
+      if (whitePathRoutes.includes(to.name)) {
+        next()
+        return
+      }
+
       if (to.meta.ignoreAuth) {
         next()
         return
@@ -35,8 +42,41 @@ export const createRouterGuards = (router) => {
       }
       next(redirectData)
       return
-    }
+    } else {
+      const routesStore = defineRoutesStore()
+      const userStore = defineUserStore()
 
-    next()
+      if (routesStore.isAddedDynamicRoutes) {
+        next()
+        return
+      }
+
+      const userInfo = await userStore.getUserInfo()
+      const routes = routesStore.generateRoutes(userInfo.menuList)
+
+      routes.forEach((route) => {
+        router.addRoute(route)
+      })
+
+      // routesStore.generateRoutes(routes)
+      routesStore.setIsAddedDynamicRoutes(true)
+
+      const isErrorPage = router
+        .getRoutes()
+        .findIndex((item) => item.name === ErrorRoute.name)
+
+      if (isErrorPage === -1) {
+        router.addRoute(ErrorRoute)
+      }
+
+      if (to.name === 'login') next({ name: 'dashboard' })
+      next(to)
+      Loading && Loading.finish()
+    }
+  })
+
+  router.afterEach((to) => {
+    const Loading = window['$loading'] || null
+    Loading && Loading.finish()
   })
 }

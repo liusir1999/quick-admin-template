@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <n-card class="login-wrap">
-      <o-form
+      <Form
         label-placement="left"
         label-width="80px"
         :model="form"
@@ -9,23 +9,36 @@
         @on-username-change="onUserNameChange"
       >
         <template v-slot:title>
-          <!-- <div class="title">登录</div> -->
+          <div class="title">登录</div>
         </template>
 
         <div class="flex-end">
-          <n-button type="primary" @click="onLogin">确认</n-button>
+          <n-button :loading="btnLoading" type="primary" @click="onLogin"
+            >确认</n-button
+          >
         </div>
-      </o-form>
+      </Form>
     </n-card>
   </div>
 </template>
 
-<script setup>
-import { reactive } from 'vue'
-import { login } from '@/api/user'
-// import { useDesignStore } from '@/store/modules/design'
+<script>
+export default {
+  name: 'Login',
+}
+</script>
 
-// const designStore = useDesignStore()
+<script setup>
+import { reactive, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '../../store/modules/user'
+
+const userStroe = useUserStore()
+const message = useMessage()
+const router = useRouter()
+
+let btnLoading = ref(false)
 
 const form = reactive({
   username: 'admin',
@@ -46,11 +59,18 @@ const options = reactive([
 
 const onLogin = async () => {
   try {
-    const res = await login(form)
-
-    console.log(res)
+    message.loading('登录中...')
+    btnLoading.value = true
+    const res = await userStroe.login(form)
+    message.destroyAll()
+    btnLoading.value = false
+    if (res.code === 200) {
+      message.success('登录成功,即将进入系统')
+      router.push('/dashboard/console')
+    }
   } catch (error) {
     console.log(error)
+    btnLoading.value = false
   }
 }
 

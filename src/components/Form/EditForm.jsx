@@ -16,7 +16,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const { options, model, onCustomChange } = props
-
+    // console.log(props, 'props')
     // 默认配置
     const defaultProps = {
       type: 'input',

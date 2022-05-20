@@ -14,15 +14,15 @@ export const defineDesignStore = defineStore({
   id: 'design',
   state: () => {
     return {
-      theme: storage.get('DESIGN_THEME') ? darkTheme : undefined,
+      theme: storage.get('DESIGN_THEME') || undefined,
       locale: storage.get('DESIGN_LOCALE') === 'zhCN' ? zhCN : dateZhCN,
     }
   },
   getters: {},
   actions: {
     setTheme(theme) {
-      this.theme = theme ? darkTheme : undefined
-      storage.set('DESIGN_THEME', !!theme)
+      this.theme = theme
+      storage.set('DESIGN_THEME', !!theme ? 'darkTheme' : undefined)
     },
   },
 })

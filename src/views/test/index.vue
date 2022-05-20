@@ -37,7 +37,8 @@ export default {
       QuickModal({
         preset: 'dialog',
         title: '测试标题',
-        content: '测试内容',
+        // content: '测试内容',
+        component: '测试内容',
       })
     }
 

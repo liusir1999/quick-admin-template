@@ -4,7 +4,6 @@
  * @date 2022/2/17
  * */
 
-import oForm from './oForm/index.jsx'
-// import oForm from './oForm/index.vue'
+import Form from './Form/index.jsx'
 
-export { oForm }
+export { Form }

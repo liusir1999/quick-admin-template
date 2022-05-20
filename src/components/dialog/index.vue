@@ -6,6 +6,10 @@ export default defineComponent({
   name: 'QuickModal',
   props: {
     ...NModal.props,
+    component: {
+      type: [String, Object],
+      default: null,
+    },
   },
   setup() {
     const state = reactive({
@@ -23,11 +27,19 @@ export default defineComponent({
   },
   render(props) {
     // console.log(props, 'props')
+    console.log(NModal)
+    const renderContent = () => {
+      return [h('div', {}, props.component)]
+    }
 
-    return h(NModal, {
-      ...props,
-      show: this.show,
-    })
+    return h(
+      NModal,
+      {
+        ...props,
+        show: this.show,
+      },
+      [renderContent()]
+    )
   },
 })
 </script>

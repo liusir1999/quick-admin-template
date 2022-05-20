@@ -2,11 +2,11 @@ import { NForm } from 'naive-ui'
 import { defineComponent } from 'vue'
 
 // components
-import oEditForm from './oEditForm'
-import oDetailForm from './oDetailForm.vue'
+import oEditForm from './EditForm'
+import oDetailForm from './DetailForm.vue'
 
 export default defineComponent({
-  name: 'oForm',
+  name: 'Form',
   props: {
     ...NForm.props,
     options: {

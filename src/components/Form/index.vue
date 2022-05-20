@@ -12,11 +12,11 @@
 
 <script>
 import { NForm } from 'naive-ui'
-import oDetailForm from './oDetailForm.vue'
-import oEditForm from './oEditForm.vue'
+import oDetailForm from './DetailForm.vue'
+import oEditForm from './EditForm.vue'
 
 export default {
-  name: 'oForm',
+  name: 'Form',
   props: {
     ...NForm.props,
     options: {

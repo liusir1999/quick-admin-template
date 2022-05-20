@@ -1,23 +1,39 @@
 <template>
-  <n-config-provider :theme="theme">
-    <RouterView />
+  <n-config-provider :theme="computedConfig">
+    <AppProvider>
+      <RouterView />
+    </AppProvider>
   </n-config-provider>
 </template>
 
 <script>
-import { defineComponent, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 
 import { useDesignStore } from '@/store/modules/design'
+import { darkTheme } from 'naive-ui'
+import { computed } from '@vue/reactivity'
+
+import AppProvider from '@/components/AppProvider/index.vue'
 
 export default defineComponent({
+  components: {
+    AppProvider,
+  },
   setup() {
     const designStore = useDesignStore()
 
-    const { theme } = toRefs(designStore)
+    const config = reactive({
+      theme: toRefs(designStore).theme,
+    })
+
+    const computedConfig = computed(() => {
+      return config.theme === 'darkTheme' ? darkTheme : undefined
+    })
 
     return {
       designStore,
-      theme,
+      computedConfig,
+      ...toRefs(config),
     }
   },
 })

@@ -3,10 +3,10 @@
  * @author lyf
  * @date 2022/2/17
  * */
-import { oForm } from '@/components/index'
+import { Form } from '@/components/index'
 
 export const useCustom = (app) => {
-  const components = [oForm]
+  const components = [Form]
 
   components.forEach((component) => {
     app.component(component.name, component)
