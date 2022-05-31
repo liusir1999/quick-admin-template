@@ -16,12 +16,14 @@ export const defineRoutesStore = defineStore({
     return {
       isAddedDynamicRoutes: false,
       routes: [],
-      menus: [],
     }
   },
   getters: {
     getIsDynamicAddedRoute() {
       return this.isAddedDynamicRoutes
+    },
+    menuList() {
+      return this.routes
     },
   },
   actions: {

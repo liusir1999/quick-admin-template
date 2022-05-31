@@ -65,6 +65,7 @@ import {
   NTimePicker,
   NBackTop,
   NSkeleton,
+  NEmpty,
 } from 'naive-ui'
 
 export const useNaive = (app) => {
@@ -134,6 +135,7 @@ export const useNaive = (app) => {
     NTimePicker,
     NBackTop,
     NSkeleton,
+    NEmpty,
   ]
 
   const naive = create({

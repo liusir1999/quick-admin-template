@@ -2,7 +2,7 @@ import request from '@/lib/request.js'
 
 const login = (data) => {
   return request({
-    url: '/login',
+    url: '/user/login',
     method: 'post',
     data,
   })
@@ -10,7 +10,7 @@ const login = (data) => {
 
 const getUserInfo = (data) => {
   return request({
-    url: '/getUserInfo',
+    url: '/user/getUserInfo',
     method: 'post',
     data,
   })

@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createRouterGuards } from './router-guards'
 
+const Layout = () => import('@/layout/index.vue')
+
 export const whiteRoutes = [
   {
     name: 'login',
@@ -13,9 +15,19 @@ export const whiteRoutes = [
     // component: () => import('@/views/test/index.jsx'),
     component: () => import('@/views/test/index.vue'),
   },
+  {
+    name: 'Redirect',
+    path: '/redirect',
+    component: Layout,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        name: 'Redirect',
+        component: () => import('@/views/redirect/index.vue'),
+      },
+    ],
+  },
 ]
-
-const Layout = () => import('@/layout/index.vue')
 
 export const ErrorRoute = {
   name: 'ErrorPage',

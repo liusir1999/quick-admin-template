@@ -31,12 +31,15 @@ export default {
 <script setup>
 import { reactive, ref } from 'vue'
 import { useMessage } from 'naive-ui'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../../store/modules/user'
 
 const userStroe = useUserStore()
 const message = useMessage()
 const router = useRouter()
+const route = useRoute()
+
+const redirect = route.query.redirect
 
 let btnLoading = ref(false)
 
@@ -66,7 +69,7 @@ const onLogin = async () => {
     btnLoading.value = false
     if (res.code === 200) {
       message.success('登录成功,即将进入系统')
-      router.push('/dashboard/console')
+      router.push(redirect ? redirect : '/dashboard/console')
     }
   } catch (error) {
     console.log(error)

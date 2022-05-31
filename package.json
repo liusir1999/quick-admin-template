@@ -7,8 +7,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vicons/antd": "^0.10.0",
+    "@vicons/ionicons5": "^0.10.0",
     "axios": "^0.26.1",
-    "naive-ui": "^2.23.2",
+    "naive-ui": "^2.29.0",
     "pinia": "^2.0.9",
     "sass": "^1.49.9",
     "vue": "^3.2.25",

@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, computed } from 'vue'
 
 import { useDesignStore } from '@/store/modules/design'
 import { darkTheme } from 'naive-ui'
-import { computed } from '@vue/reactivity'
 
 import AppProvider from '@/components/AppProvider/index.vue'
 

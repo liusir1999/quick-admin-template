@@ -18,6 +18,10 @@ body {
   background-color: #f3f3f3;
 }
 
+.flex {
+  display: flex;
+}
+
 .flex-space-between {
   @include flex(space-between, center, row);
 }
