@@ -22,6 +22,10 @@ body {
   display: flex;
 }
 
+.alignCenter {
+  align-items: center;
+}
+
 .flex-space-between {
   @include flex(space-between, center, row);
 }

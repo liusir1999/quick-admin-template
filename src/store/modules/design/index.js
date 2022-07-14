@@ -16,6 +16,7 @@ export const defineDesignStore = defineStore({
     return {
       theme: storage.get('DESIGN_THEME') || undefined,
       locale: storage.get('DESIGN_LOCALE') === 'zhCN' ? zhCN : dateZhCN,
+      tabsList: storage.get('DESIGN_TABSLIST') || [],
     }
   },
   getters: {},
@@ -23,6 +24,17 @@ export const defineDesignStore = defineStore({
     setTheme(theme) {
       this.theme = theme
       storage.set('DESIGN_THEME', !!theme ? 'darkTheme' : undefined)
+    },
+    addTabs(info) {
+      const item = this.tabsList.find((item) => item.name === info.name) || {}
+      if (!Object.keys(item).length) {
+        this.tabsList.push(info)
+        storage.set('DESIGN_TABSLIST', this.tabsList)
+      }
+    },
+    delTabs(index) {
+      this.tabsList.splice(index, 1)
+      storage.set('DESIGN_TABSLIST', this.tabsList)
     },
   },
 })

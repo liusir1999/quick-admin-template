@@ -14,6 +14,10 @@ import {
   LockOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
+  CloseOutlined,
+  DownOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from '@vicons/antd'
 
 export const IconsMap = {
@@ -27,4 +31,8 @@ export const IconsMap = {
   LockOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
+  CloseOutlined,
+  DownOutlined,
+  LeftOutlined,
+  RightOutlined,
 }

@@ -3,13 +3,6 @@
     <div class="search-box" v-show="show">
       <div class="search-box-title">搜索栏</div>
 
-      <!-- <n-select
-        v-model:value="dumpName"
-        filterable
-        placeholder="选择菜单"
-        :options="options"
-        @change="onChange"
-      ></n-select> -->
       <n-input v-model:value="dumpName" placeholder="请输入菜单名称"></n-input>
 
       <div class="search-list">
@@ -111,12 +104,12 @@ export default defineComponent({
 
 // .zoom-fade-enter-to {
 //   opacity: 1 !important;
-//   top: 10% !important;
+//   top: 120px !important;
 // }
 
 // .zoom-fade-leave-form {
 //   opacity: 1 !important;
-//   top: 10% !important;
+//   top: 120px !important;
 // }
 
 // .zoom-fade-leave-to {
@@ -144,14 +137,14 @@ export default defineComponent({
 
   to {
     opacity: 1;
-    top: 10%;
+    top: 120px;
   }
 }
 
 @keyframes FormBottom {
   0% {
     opacity: 1;
-    top: 10%;
+    top: 120px;
   }
 
   to {
@@ -161,12 +154,12 @@ export default defineComponent({
 }
 
 .search-box {
-  position: absolute;
-  top: 10%;
+  position: fixed;
+  top: 120px;
   left: 50%;
   width: 600px;
   // height: 100px;
-  z-index: 77;
+  z-index: 99;
   padding: 10px;
   background-color: #fff;
   transform: translate(-50%, 0);
@@ -189,7 +182,7 @@ export default defineComponent({
   &-keydown {
     color: #fff;
     padding: 1px 2px;
-    border-radius: 10%;
+    border-radius: 120px;
     margin: 0 4px;
     background-color: #606266;
   }
