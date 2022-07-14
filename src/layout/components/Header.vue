@@ -102,7 +102,7 @@ export default defineComponent({
     const generator = (list = []) => {
       return list.map((item) => {
         const currentMenu = {
-          label: item?.meta?.title,
+          label: item.meta.title,
           key: item.name,
           disabled: item.path === '/',
         }
